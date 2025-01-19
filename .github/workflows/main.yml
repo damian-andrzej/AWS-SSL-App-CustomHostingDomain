@@ -25,6 +25,6 @@ jobs:
       # Sync files to S3 bucket
       - name: Sync files to S3
         run: |
-          aws s3 sync . s3://your-s3-bucket-name --delete
+          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --exclude "*" --include "*.html" --include "*.css" --include "*.js"
         env:
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
