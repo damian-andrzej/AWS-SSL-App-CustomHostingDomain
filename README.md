@@ -56,7 +56,7 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
      - `S3_BUCKET_NAME`: Your bucket name.
 
 2. **Define the Workflow**:
-   Create a `.github/workflows/s3-sync.yml` file in your repository and add the following configuration:
+   Create a `.github/workflows/main.yml` file in your repository and add the following configuration:
    ```yaml
    name: Update S3 Bucket on Change
 
