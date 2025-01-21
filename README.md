@@ -1,4 +1,4 @@
-# S3 Website/Custom domain hosting/Cloudfront Network/ACM certificate - Content Update using GitHub Actions
+# Automated Static Website Deployment with S3, CloudFront, Custom Domain, ACM SSL and GitHub Actions
 
 This guide explains how to create a an S3 bucket website that is hosted on custom domain server. Step by step we enhance app with SSL certificate and CloudFront network deployment.
 All content update/refresh will be automated by Github action pipelines
