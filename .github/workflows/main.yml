@@ -28,3 +28,11 @@ jobs:
           aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --exclude "*" --include "*.html" --include "*.css" --include "*.js"
         env:
           S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+
+      # Sync files to S3 bucket
+      # Step 4: Invalidate CloudFront cache
+      - name: Invalidate CloudFront Cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"
