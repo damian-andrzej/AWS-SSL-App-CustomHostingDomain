@@ -1,6 +1,7 @@
-# Automate File Updates to an S3 Bucket Using GitHub Actions
+# S3 Website/Custom domain hosting/Cloudfront Network/ACM certificate - Content Update using GitHub Actions
 
-This guide explains how to create a GitHub Actions pipeline to automatically propagate changes to an S3 bucket after repository file updates.
+This guide explains how to create a an S3 bucket website that is hosted on custom domain server. Step by step we enhance app with SSL certificate and CloudFront network deployment.
+All content update/refresh will be automated by Github action pipelines
 
 ## Steps
 
@@ -86,6 +87,13 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
          - name: Sync files to S3
            run: |
              aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --delete
+
+        # Step 4: Invalidate CloudFront cache
+         - name: Invalidate CloudFront Cache
+           run: |
+               aws cloudfront create-invalidation \
+               --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+               --paths "/*"
    ```
 
 3. **Commit and Push the Workflow**:
@@ -98,7 +106,7 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
 
 ---
 ### 5. Request ACM Certificate
-1. **Go to ACM Dashboard**:
+ **Go to ACM Dashboard**:
   Select Request public certificate, Enter your domain name for my purpose it will be "damian-andrzej.com"
   Choose validation method, DNS one is simplest and fastest(10 to 30 minutes)
   Last step is to copy CNAME record that you see on the screen (after you finish the process) and duplicate on your hostname provider's site.
@@ -117,6 +125,11 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
      - **Custom SSL Certificate**: Select the ACM certificate you created earlier.
      - **Alternate Domain Name (CNAME)**: Enter your custom domain (e.g., `example.com`).
 3. Click **Create Distribution** and wait for the status to become **Deployed** (may take 15–30 minutes).
+4. Add permission for IAM group you use for programatic access
+   **CloudFrontFullAccessGroup** - to do cache invalidation step
+5. Deploy another secret to Github Secrets & Credential
+   **CLOUDFRONT_DISTRIBUTION_ID**
+   
 
 ---
 
