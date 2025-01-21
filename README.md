@@ -97,7 +97,12 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
      ```
 
 ---
-
+### 5. Request ACM Certificate
+1. **Go to ACM Dashboard**:
+  Select Request public certificate, Enter your domain name for my purpose it will be "damian-andrzej.com"
+  Choose validation method, DNS one is simplest and fastest(10 to 30 minutes)
+  Last step is to copy CNAME record that you see on the screen (after you finish the process) and duplicate on your hostname provider's site.
+  Then select "create Route53" record - automatically route53 host zone will be updated too with your CNAME
 ### Summary
 Now, every time you push changes to your repository, the GitHub Actions workflow will automatically update the specified S3 bucket with the latest files.
 
