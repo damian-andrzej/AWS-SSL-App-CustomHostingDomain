@@ -103,6 +103,23 @@ This guide explains how to create a GitHub Actions pipeline to automatically pro
   Choose validation method, DNS one is simplest and fastest(10 to 30 minutes)
   Last step is to copy CNAME record that you see on the screen (after you finish the process) and duplicate on your hostname provider's site.
   Then select "create Route53" record - automatically route53 host zone will be updated too with your CNAME
+
+## 6: Create a CloudFront Distribution
+
+1. Navigate to the [CloudFront Console](https://console.aws.amazon.com/cloudfront/).
+2. Click **Create Distribution** and configure the settings:
+   - **Origin Settings**:
+     - **Origin Domain Name**: Use the S3 Website Endpoint (e.g., `your-bucket-name.s3-website-us-east-1.amazonaws.com`).
+   - **Default Cache Behavior Settings**:
+     - **Viewer Protocol Policy**: Choose **Redirect HTTP to HTTPS**.
+     - **Allowed HTTP Methods**: Select `GET, HEAD` (sufficient for static websites).
+   - **Distribution Settings**:
+     - **Custom SSL Certificate**: Select the ACM certificate you created earlier.
+     - **Alternate Domain Name (CNAME)**: Enter your custom domain (e.g., `example.com`).
+3. Click **Create Distribution** and wait for the status to become **Deployed** (may take 15–30 minutes).
+
+---
+
 ### Summary
 Now, every time you push changes to your repository, the GitHub Actions workflow will automatically update the specified S3 bucket with the latest files.
 
