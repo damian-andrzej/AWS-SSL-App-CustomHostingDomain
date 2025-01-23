@@ -99,7 +99,7 @@ All content update/refresh will be automated by Github action pipelines
 3. **Commit and Push the Workflow**:
    - Save the file and push it to your repository:
      ```bash
-     git add .github/workflows/s3-sync.yml
+     git add .github/workflows/main.yml
      git commit -m "Add GitHub Actions pipeline for S3 sync"
      git push origin main
      ```
