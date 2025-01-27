@@ -28,7 +28,7 @@ resource "aws_s3_bucket_object" "index_html" {
 resource "aws_s3_bucket_object" "error_html" {
   bucket = aws_s3_bucket.static_website.bucket
   key    = "error.html"
-  source = "path/to/error.html" # Path to your local error.html
+  source = "C:\Users\damianus\Desktop\error.html" # Path to your local error.html
   acl    = "public-read"
 }
 
@@ -41,7 +41,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     custom_origin_config {
       http_port              = 80
       https_port             = 443
-      origin_protocol_policy = "http-only" # S3 website endpoints only support HTTP
+      origin_protocol_policy = "http-only"
     }
   }
 
