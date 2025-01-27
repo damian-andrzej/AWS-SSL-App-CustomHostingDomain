@@ -84,9 +84,11 @@ All content update/refresh will be automated by Github action pipelines
              aws-region: us-east-1  # Replace with your AWS region
 
          # Sync files to S3 bucket
-         - name: Sync files to S3
-           run: |
-             aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --delete
+      - name: Sync files to S3
+        run: |
+          aws s3 sync . s3://${{ secrets.S3_BUCKET_NAME }} --exclude "*" --include "*.html" --include "*.css" --include "*.js"
+        env:
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
 
         # Step 4: Invalidate CloudFront cache
          - name: Invalidate CloudFront Cache
