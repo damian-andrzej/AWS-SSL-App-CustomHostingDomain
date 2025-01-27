@@ -21,14 +21,14 @@ resource "aws_s3_bucket" "static_website" {
 resource "aws_s3_bucket_object" "index_html" {
   bucket = aws_s3_bucket.static_website.bucket
   key    = "index.html"
-  source = "C:\Users\damianus\Desktop\index.html" # Path to your local index.html
+  source = "C:\\Users\\damianus\\Desktop\\index.html" # Path to your local index.html
   acl    = "public-read"
 }
 
 resource "aws_s3_bucket_object" "error_html" {
   bucket = aws_s3_bucket.static_website.bucket
   key    = "error.html"
-  source = "C:\Users\damianus\Desktop\error.html" # Path to your local error.html
+  source = "C:\\Users\\damianus\\Desktop\\error.html" # Path to your local error.html
   acl    = "public-read"
 }
 
