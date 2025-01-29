@@ -1,3 +1,14 @@
+terraform {
+  backend "s3" {
+    bucket         = "damian-andrzej-bucket9"      # Replace with your actual S3 bucket name
+    key            = "terraform/state.tfstate"      # Path to store the state file
+    region         = "us-east-1"                    # Region of the S3 bucket
+    encrypt        = true                            # Enable encryption for security
+    dynamodb_table = "terraform-locks"              # Optional: for state locking
+  }
+}
+
+
 provider "aws" {
   region = "us-east-1" # ACM for CloudFront must be in us-east-1
 }
