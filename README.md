@@ -138,4 +138,4 @@ All content update/refresh will be automated by Github action pipelines
 ### Summary
 Now, every time you push changes to your repository, the GitHub Actions workflow will automatically update the specified S3 bucket with the latest files.
 
-Make sure your AWS credentials and bucket settings are correct to avoid permission 
+Make sure your AWS credentials and bucket settings are correct to avoid permission issues
